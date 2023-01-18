@@ -11,6 +11,19 @@
             </button>
             <div class="navbar-collapse collapse w-100" id="navbar">
                 <ul class="navbar-nav ml-auto">
+
+                    {% for option, label in menu %}
+                    <li class="nav-item">
+                        <a href="{% url option %}" 
+                        {% if request.resolver_match.url_name == option %}
+                        class="nav-link active"
+                        {% else %}
+                        class="nav-link"
+                        {% endif %}
+                        ">{{ label }}</a>
+                    </li>
+                    {% endfor %}
+{% comment %} 
                     <li class="nav-item">
                         <a
                           {% if '/' == request.path %}
@@ -29,7 +42,7 @@
                         {% else %}
                         class="nav-link"
                         {% endif %}
-                         href="#">
+                         href="{% url 'cars' %}">
                             Cars
                         </a>
                     </li>
@@ -54,7 +67,7 @@
                          href="{% url 'services' %}">
                             Services
                         </a>
-                    </li>
+                    </li> {% endcomment %}
 
 
                     <li class="nav-item dropdown">
