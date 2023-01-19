@@ -99,10 +99,10 @@ class Car(models.Model):
   #   description = models.TextField(max_length=500)
   description = RichTextField()
   car_photo = models.ImageField(upload_to='photos/%Y/%m/%d/')
-  car_photo1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-  car_photo2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-  car_photo3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
-  car_photo4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+  car_photo_1 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+  car_photo_2 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+  car_photo_3 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
+  car_photo_4 = models.ImageField(upload_to='photos/%Y/%m/%d/', blank=True)
   # features = models.CharField(max_length=100, choices=features_choices)
   features = MultiSelectField(choices=features_choices)
   body_style = models.CharField(max_length=100)
@@ -124,3 +124,10 @@ class Car(models.Model):
 
   def location(self):
     return f'{self.city}, {self.state}'
+
+  def photos(self):
+    return [(i+0, ph) for i, ph in enumerate((self.car_photo, self.car_photo_1, self.car_photo_2, self.car_photo_3, self.car_photo_4, )) if ph is not None ]
+
+  def list_features(self):
+    # print(self.features)
+    return sorted(self.features)
