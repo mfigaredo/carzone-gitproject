@@ -428,38 +428,6 @@
     }
 },
 {
-    "model": "socialaccount.socialapp",
-    "pk": 1,
-    "fields": {
-        "provider": "facebook",
-        "name": "Facebook login",
-        "client_id": "5909903425755422",
-        "secret": "7eac344d41941c2f767e520de7acf79c",
-        "key": "",
-        "sites": [
-            [
-                "localhost:8000"
-            ]
-        ]
-    }
-},
-{
-    "model": "socialaccount.socialapp",
-    "pk": 2,
-    "fields": {
-        "provider": "google",
-        "name": "Google login",
-        "client_id": "826096105093-f0ijq7ajqe2nautrlh1plbogo707frau.apps.googleusercontent.com",
-        "secret": "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",
-        "key": "",
-        "sites": [
-            [
-                "localhost:8000"
-            ]
-        ]
-    }
-},
-{
     "model": "socialaccount.socialaccount",
     "pk": 1,
     "fields": {
