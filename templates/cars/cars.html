@@ -42,30 +42,18 @@
                                   <div class="overlap-box">
                                       <div class="overlap-btns-area">
                                           <div class="car-magnify-gallery">
-                                              <a href="{{car.car_photo.url}}" class="overlap-btn">
-                                                  <i class="fa fa-expand"></i>
-                                                  <img class="hidden" src="{{car.car_photo.url}}">
-                                              </a>
-                                              {% if car.car_photo_1 %}
-                                              <a href="{{car.car_photo_1.url}}" class="hidden" >
-                                                  <img class="hidden" src="{{car.car_photo_1.url}}">
-                                              </a>
-                                              {% endif %}
-                                              {% if car.car_photo_2 %}
-                                              <a href="{{car.car_photo_2.url}}" class="hidden">
-                                                  <img class="hidden" src="{{car.car_photo_2.url}}">
-                                              </a>
-                                              {% endif %}
-                                              {% if car.car_photo_3 %}
-                                              <a href="{{car.car_photo_3.url}}" class="hidden">
-                                                  <img class="hidden" src="{{car.car_photo_3.url}}">
-                                              </a>
-                                              {% endif %}
-                                              {% if car.car_photo_4 %}
-                                              <a href="{{car.car_photo_4.url}}" class="hidden" >
-                                                  <img class="hidden" src="{{car.car_photo_4.url}}">
-                                              </a>
-                                              {% endif %}
+                                              
+
+                                              {% for idx, ph in car.photos %}
+                                                <a href="{{ ph.url }}" class="{% if idx == 0 %}overlap-btn{% else %}hidden{% endif %}" >
+                                                    {% if idx == 0 %}
+                                                        <i class="fa fa-expand"></i>
+                                                    {% endif %}
+                                                    <img class="hidden" src="{{ ph.url }}">
+                                                </a>
+                                              {% endfor %}
+
+                                              
                                           </div>
                                       </div>
                                   </div>
@@ -91,11 +79,9 @@
                           </div>
                       </div>
                   </div>
-          {% endfor %}
-
-
-
+                {% endfor %}
               </div>
+
               <!-- Page navigation start -->
               <div class="pagination-box p-box-2 text-center">
                   <nav aria-label="Page navigation example">
@@ -139,7 +125,7 @@
                   <!-- Advanced search start -->
                   <div class="widget advanced-search2">
                       <h3 class="sidebar-title">Search your desire car</h3>
-                      <form action="#" method="">
+                      <form action="{% url 'search' %}" method="">
                           <div class="form-group">
                               <input type="text" name="keyword" placeholder="Search by name" class="form-control">
                           </div>
@@ -147,23 +133,23 @@
                           <div class="form-group">
                               <select class="form-control search-fields" name="model">
                                   <option selected="true" disabled="disabled">Model</option>
-                                  {% for model in model_search %}
+                                  {% for model in attribute_search.model %}
                                     <option value="{{model}}">{{model}}</option>
                                   {% endfor %}
                               </select>
                           </div>
                           <div class="form-group">
-                              <select class="form-control search-fields" name="city">
+                              <select class="form-control search-fields" name="location">
                                   <option selected="true" disabled="disabled">Location</option>
-                                  {% for city in city_search %}
-                                    <option value="{{city}}">{{city}}</option>
+                                  {% for location in attribute_search.location %}
+                                    <option value="{{location}}">{{location}}</option>
                                   {% endfor %}
                               </select>
                           </div>
                           <div class="form-group">
                               <select class="form-control search-fields" name="year">
                                   <option selected="true" disabled="disabled">Year</option>
-                                  {% for year in year_search %}
+                                  {% for year in attribute_search.year %}
                                     <option value="{{year}}">{{year}}</option>
                                   {% endfor %}
                               </select>
@@ -171,7 +157,7 @@
                           <div class="form-group">
                               <select class="form-control search-fields" name="body_style">
                                   <option selected="true" disabled="disabled">Select Type Of Car</option>
-                                  {% for body_style in body_style_search %}
+                                  {% for body_style in attribute_search.body_style %}
                                     <option value="{{body_style}}">{{body_style}}</option>
                                   {% endfor %}
                               </select>

@@ -41,7 +41,7 @@
         </div>
         <!-- Search box 3 start -->
         <div class="search-box-4 sb-8">
-            <form action="#" method="">
+            <form action="{% url 'search' %}" method="">
                 <div class="form-group">
                     <input type="text" name="keyword" placeholder="Search by name" class="form-control">
                 </div>
@@ -49,23 +49,26 @@
                 <div class="form-group">
                     <select class="form-control search-fields" name="model">
                         <option selected="true" disabled="disabled">Model</option>
-                        {% for model in model_search %}
+                        {% for model in attribute_search.model %}
                           <option value="{{model}}">{{model}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
-                    <select class="form-control search-fields" name="city">
+                    <select class="form-control search-fields" name="location">
                         <option selected="true" disabled="disabled">Location</option>
-                        {% for city in city_search %}
+                        {% comment %} {% for city in city_search %}
                           <option value="{{city}}">{{city}}</option>
+                        {% endfor %} {% endcomment %}
+                        {% for location in attribute_search.location %}
+                          <option value="{{location}}">{{location}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
                     <select class="form-control search-fields" name="year">
                         <option selected="true" disabled="disabled">Year</option>
-                        {% for year in year_search %}
+                        {% for year in attribute_search.year %}
                           <option value="{{year}}">{{year}}</option>
                         {% endfor %}
                     </select>
@@ -73,7 +76,7 @@
                 <div class="form-group">
                     <select class="form-control search-fields" name="body_style">
                         <option selected="true" disabled="disabled">Select Type Of Car</option>
-                        {% for body_style in body_style_search %}
+                        {% for body_style in attribute_search.body_style %}
                           <option value="{{body_style}}">{{body_style}}</option>
                         {% endfor %}
                     </select>

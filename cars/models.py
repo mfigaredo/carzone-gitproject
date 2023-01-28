@@ -122,12 +122,26 @@ class Car(models.Model):
   def __str__(self):
     return f'{self.car_title}'
 
+  @property
   def location(self):
     return f'{self.city}, {self.state}'
 
+  @property
   def photos(self):
-    return [(i+0, ph) for i, ph in enumerate((self.car_photo, self.car_photo_1, self.car_photo_2, self.car_photo_3, self.car_photo_4, )) if ph is not None ]
+    return [(i+0, ph) for i, ph in enumerate(filter(None, (self.car_photo, self.car_photo_1, self.car_photo_2, self.car_photo_3, self.car_photo_4, ))) ]
+    # return [(i+0, ph) for i, ph in enumerate(filter(None, self.car_photo, self.car_photo_1, self.car_photo_2, self.car_photo_3, self.car_photo_4, )) if ph is not None and str(ph)!='' ]
 
+  @property
   def list_features(self):
     # print(self.features)
     return sorted(self.features)
+
+  def attribute_values_search():
+    return {
+      'model': sorted(Car.objects.values_list('model', flat=True).distinct()),
+      'year': sorted(Car.objects.values_list('year', flat=True).distinct()),
+      'city': sorted(Car.objects.values_list('city', flat=True).distinct()),
+      'transmission': sorted(Car.objects.values_list('transmission', flat=True).distinct()),
+      'body_style': sorted(Car.objects.values_list('body_style', flat=True).distinct()),
+      'location': sorted([f'{city}, {state}' for (city,state) in Car.objects.values_list('city', 'state').distinct()]),
+    }

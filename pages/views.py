@@ -11,6 +11,7 @@ def home(request):
     'teams': teams,
     'featured_cars': featured_cars,
     'all_cars' : all_cars,
+    'attribute_search': Car.attribute_values_search(),
   }
   return render(request, 'pages/home.html', data)
 

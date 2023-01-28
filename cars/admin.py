@@ -14,7 +14,7 @@ class CarAdmin(admin.ModelAdmin):
   list_display = ('id', 'thumbnail', 'car_title', 'location', 'color', 'model', 'year', 'body_style', 'fuel_type', 'is_featured', )
   list_display_links = ('car_title', 'thumbnail',  )
   list_editable = ('is_featured', )
-  search_fields = ('id', 'car_title', 'city', 'model', 'body_style', 'fuel_type', )
+  search_fields = ('id', 'car_title', 'city', 'model', 'body_style', 'fuel_type', 'state', )
   list_filter = ('city', 'model', 'body_style', 'fuel_type', )
 
   # def location(self, obj):
